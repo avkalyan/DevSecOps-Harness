@@ -1,0 +1,46 @@
+#%RAML 1.0
+
+types:
+  employeeDataType: !include /exchange_modules/8d13bfac-0457-43c1-9335-2edbde6c66f2/employee-data-type/1.0.0/employee-data-type.raml
+title: Employee Administraton API
+baseUri: /employee
+description: Employee Administration System API to add or retrieve an employee record
+mediaType:
+  - application/json
+protocols:
+  - HTTP
+/employee:
+  post:
+    description: System API to add new employee to the system
+    body:
+      type: employeeDataType
+    responses:
+      "201":
+        description: Employee added successfully to the system
+        body:
+          application/json:
+            description: Employee ID
+            example: EMP1234
+            type: string
+  get:
+    description: System API to retrieve an employee record by employee id
+    queryParameters:
+      employeeFirstName:
+        example: John
+        type: string
+      employeeLastName:
+        example: Doe
+        type: string
+      employeeDateOfBirth:
+        example: 1990-07-18
+        type: string
+      employeeGender:
+        example: M
+        type: string
+    responses:
+      "200":
+        description: Employee record retrieved successfully
+        body:
+          type: 
+            type: employeeDataType
+

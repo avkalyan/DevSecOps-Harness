@@ -1,0 +1,9 @@
+INFO  2020-11-01 18:30:03,115 [main] [processor: ; event: ] org.mule.munit.remote.RemoteRunner: Run Started
+INFO  2020-11-01 18:30:03,170 [main] [processor: ; event: ] org.mule.munit.remote.notifiers.SocketNotifier: Connected to localhost on port 50227
+INFO  2020-11-01 18:30:08,017 [main] [processor: ; event: ] org.mule.munit.remote.coverage.CoverageManager: Starting coverage server
+INFO  2020-11-01 18:30:17,600 [pool-4-thread-1] [processor: ; event: ] org.mule.munit.remote.coverage.CoverageManager: accumulating covered locations
+INFO  2020-11-01 18:30:17,608 [pool-5-thread-1] [processor: ; event: ] org.mule.munit.remote.coverage.CoverageManager: accumulating covered locations
+INFO  2020-11-01 18:30:23,707 [main] [processor: ; event: ] org.mule.munit.remote.coverage.CoverageManager: Shutting down coverage server
+INFO  2020-11-01 18:30:23,708 [main] [processor: ; event: ] org.mule.munit.remote.coverage.CoverageManager: Calculating application coverage
+ERROR 2020-11-01 18:30:23,708 [pool-3-thread-1] [processor: ; event: ] org.mule.munit.plugins.coverage.server.CoverageServer: Failed to start Coverage Server in port 50000
+INFO  2020-11-01 18:30:23,716 [main] [processor: ; event: ] org.mule.munit.remote.RemoteRunner: Done

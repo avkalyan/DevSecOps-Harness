@@ -1,0 +1,41 @@
+#%RAML 1.0 DataType
+displayName: Employee Data Type
+description: Data Type to access Employee Records
+type: object
+properties:
+  ID?: 
+    type: string
+    example: 
+      value: EMP1234
+  firstName: 
+    type: string
+    example: 
+      value: John
+  lastName: 
+    type: string
+    example: 
+      value: Doe
+  gender?: 
+    type: string
+    example: 
+      value: M 
+  dateOfBirth:
+    type: date-only
+    example: 
+      value: 1990-07-18
+  email: 
+    type: string
+    example: 
+      value: john.doe@abccorp.com 
+  phoneNumber?: 
+    type: string 
+    example: 
+      value: 111-111-1111 
+  status?: 
+    type: string
+    example:
+      value: Active 
+  employerId?: 
+    type: string
+    example:
+      value: EMR1234   

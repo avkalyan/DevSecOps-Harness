@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<mule xmlns:ee="http://www.mulesoft.org/schema/mule/ee/core"
+	xmlns:db="http://www.mulesoft.org/schema/mule/db" xmlns:dbserver="http://www.mulesoft.org/schema/mule/dbserver"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:munit="http://www.mulesoft.org/schema/mule/munit"
+	xmlns:munit-tools="http://www.mulesoft.org/schema/mule/munit-tools" xmlns="http://www.mulesoft.org/schema/mule/core" xmlns:doc="http://www.mulesoft.org/schema/mule/documentation" xsi:schemaLocation="
+		http://www.mulesoft.org/schema/mule/core http://www.mulesoft.org/schema/mule/core/current/mule.xsd
+		http://www.mulesoft.org/schema/mule/munit http://www.mulesoft.org/schema/mule/munit/current/mule-munit.xsd
+		http://www.mulesoft.org/schema/mule/munit-tools  http://www.mulesoft.org/schema/mule/munit-tools/current/mule-munit-tools.xsd
+http://www.mulesoft.org/schema/mule/db http://www.mulesoft.org/schema/mule/db/current/mule-db.xsd
+http://www.mulesoft.org/schema/mule/dbserver http://www.mulesoft.org/schema/mule/dbserver/current/mule-dbserver.xsd
+http://www.mulesoft.org/schema/mule/ee/core http://www.mulesoft.org/schema/mule/ee/core/current/mule-ee.xsd">
+	<munit:config name="employee-administration-system-api-test-suite.xml" />
+	<dbserver:config name="MUnit_DB_Server_Config" doc:name="MUnit DB Server Config" doc:id="a0b9dead-7961-43e7-8ee5-185daf2dba1f" >
+		<dbserver:connection database="DEMO" sqlFile="Employee.sql" connectionStringParameters="MODE=Oracle;"/>
+	</dbserver:config>
+	<db:config name="H2_Database_Config" doc:name="Database Config" doc:id="d459853f-6442-4dc8-90a6-24fe362d7a71" >
+		<db:generic-connection url="jdbc:h2:tcp://localhost/mem:DEMO;MODE=Oracle;" driverClassName="org.h2.Driver" />
+	</db:config>
+	<configuration-properties doc:name="Configuration properties" doc:id="de9e8f86-72e1-45ac-9300-d4fb5f734665" file="mule-artifact.properties" />
+	<munit:before-suite name="employee-administration-system-api-test-suiteBefore_Suite" doc:id="d3270ec0-6862-429e-9d33-8f03f2315959" >
+		<db:insert doc:name="Insert mock data into H2 database" doc:id="2fc648db-442b-4dae-9c03-7ba79ac3ec80" config-ref="H2_Database_Config">
+			<db:sql ><![CDATA[INSERT INTO EMPLOYEE (FIRSTNAME, LASTNAME, DATEOFBIRTH, GENDER, EMAIL, PHONENUMBER, STATUS, EMPLOYERID, LASTMODIFIEDDATE) 
+VALUES
+(:firstName, :lastName, :dateOfBirth, :gender, :email, :phoneNumber, :status, :employerId, :lastModifiedDate)]]></db:sql>
+			<db:input-parameters ><![CDATA[#[{
+	'firstName': 'UnitTestFirstName',
+	'lastName': 'UnitTestLastName',
+	'dateOfBirth': '1900-01-01',
+	'gender': 'M',
+	'email': 'unittestfirstname.unittestlastname@abccorp.com',
+	'phoneNumber': '000-000-0000',
+	'status': 'ACTIVE',
+	'employerId': 'EMR1111',
+	'lastModifiedDate': now() as String{format: 'yyyy-MM-dd HH:mm:ss.SSS'}
+}]]]></db:input-parameters>
+		</db:insert>
+	</munit:before-suite>
+	<munit:test name="employee-administration-system-api-test-suiteTest" doc:id="fbb4aca5-fde1-4593-9ade-5e2de454f6b6" description="Employee Administration System API - Verify POST method implementation">
+		<munit:enable-flow-sources >
+			<munit:enable-flow-source value="post:\employee:application\json:employee-api-2-config" />
+		</munit:enable-flow-sources>
+		<munit:behavior >
+			<set-payload value='#[{
+  "firstName": "JohnFirstName",
+  "lastName": "SmithLastName",
+  "gender": "M",
+  "dateOfBirth": "1990-07-18",
+  "email": "johnfirstname.smithlastname@abccorp.com",
+  "phoneNumber": "222-22-2222",
+  "status": "Active",
+  "employerId": "EMR2222"
+}]' doc:name="Set the payload to insert" doc:id="ef50e2ff-b12a-40cc-82f7-652b6995caf2" />
+		</munit:behavior>
+		<munit:execution >
+			<flow-ref doc:name="Flow Reference" doc:id="7b8a91f4-1624-4d7e-ad03-95d9147c79e1" name="post:\employee:application\json:employee-api-2-config"/>
+		</munit:execution>
+		<munit:validation >
+			<db:select doc:name="Retrieve inserted record" doc:id="8fca2c21-0489-408d-980a-b10dc72d9d3d" config-ref="H2_Database_Config">
+				<db:sql ><![CDATA[SELECT ID, FIRSTNAME, LASTNAME, DATEOFBIRTH, GENDER, EMAIL, PHONENUMBER, STATUS, EMPLOYERID, LASTMODIFIEDDATE FROM EMPLOYEE
+WHERE FIRSTNAME=:employeeFirstName AND LASTNAME=:employeeLastName AND DATEOFBIRTH=:employeeDateOfBirth AND GENDER=:employeeGender]]></db:sql>
+				<db:input-parameters ><![CDATA[#[{
+	'employeeFirstName': 'JohnFirstName',
+	'employeeLastName': 'SmithLastName',
+	'employeeDateOfBirth': '1990-07-18',
+	'employeeGender': 'M'
+}]]]></db:input-parameters>
+			</db:select>
+			<logger level="INFO" doc:name="Logger" doc:id="3b1f53d6-7ad3-46bd-a581-575596f08009" message="#[output application/json --- payload[0]]"/>
+			<munit-tools:assert-that doc:name="Assert that" doc:id="fdcc2713-fa82-4fac-ac94-cbb38036f0a9" expression='#[payload[0].firstName ++ " " ++ payload[0].lastName]' is="#[MunitTools::equalToIgnoringCase('JohnFirstName SmithLastName')]"/>
+		</munit:validation>
+	</munit:test>
+	<munit:test name="employee-administration-system-api-test-suiteTest1" doc:id="96a2934d-8db9-403e-88a4-62bdab4c01c5" >
+		<munit:behavior >
+			<munit:set-event doc:name="Set Event" doc:id="f30cbaf4-f077-492c-be4a-516603f4d461" >
+				<munit:attributes value='{
+	"queryParams": {
+		"employeeFirstName": "UnitTestFirstName",
+		"employeeLastName": "UnitTestLastName",
+		"employeeDateOfBirth": "1900-01-01",
+		"employeeGender": "M"
+	}
+}' mediaType="application/json" />
+			</munit:set-event>
+		</munit:behavior>
+		<munit:execution >
+			<flow-ref doc:name="Flow Reference" doc:id="2145ad1b-348c-411d-97a1-e23001a0b26b" name="get:\employee:employee-api-2-config"/>
+		</munit:execution>
+		<munit:validation >
+			<logger level="INFO" doc:name="Logger" doc:id="e4df4cc2-4fcc-406d-b587-dc8ddba4f6c5" message="#[output application/json --- payload[0]]"/>
+			<munit-tools:assert-that doc:name="Assert that" doc:id="106d85e9-203f-409d-ac23-3efe018aba5e" is="#[MunitTools::equalToIgnoringCase('UnitTestFirstName UnitTestLastName')]" expression='#[payload[0].FIRSTNAME ++ " " ++ payload[0].LASTNAME]'/>
+		</munit:validation>
+	</munit:test>
+
+</mule>
