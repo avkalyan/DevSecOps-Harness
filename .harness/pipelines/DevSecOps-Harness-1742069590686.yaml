@@ -20,6 +20,14 @@ pipeline:
           execution:
             steps:
               - step:
+                  type: Run
+                  name: docker
+                  identifier: docker
+                  spec:
+                    shell: Bash
+                    command: docker login
+                contextType: Pipeline
+              - step:
                   identifier: echo
                   name: echo
                   spec:
