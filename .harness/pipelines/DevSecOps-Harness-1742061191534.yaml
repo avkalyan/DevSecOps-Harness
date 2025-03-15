@@ -23,13 +23,24 @@ pipeline:
                   identifier: echo
                   name: echo
                   spec:
+                    shell: Bash
                     command: echo hello world
                   timeout: ""
                   type: Run
+              - step:
+                  type: Run
+                  name: Build Mule Project
+                  identifier: Build_Mule_Project
+                  spec:
+                    connectorRef: account.harnessImage
+                    image: harnessImage
+                    shell: Bash
+                    command: mvn clean install -nsu -Dlicense.skip=true
+                    imagePullPolicy: IfNotPresent
           platform:
-            arch: Amd64
             os: MacOS
+            arch: Amd64
           runtime:
-            spec: {}
             type: Docker
+            spec: {}
         type: CI
