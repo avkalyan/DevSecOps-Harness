@@ -27,7 +27,10 @@ pipeline:
                   identifier: Run_maven_build
                   spec:
                     shell: Bash
-                    command: mvn clean install -nsu -DskipMunitTests -Dlicense.skip=true
+                    command: |-
+                      export M2_HOME=/usr/local/Cellar/maven/3.9.9
+                      export PATH=$PATH:$M2_HOME/bin
+                      mvn clean install -nsu -DskipMunitTests -Dlicense.skip=true
           platform:
             os: MacOS
             arch: Amd64
