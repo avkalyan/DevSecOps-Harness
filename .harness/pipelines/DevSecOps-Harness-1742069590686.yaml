@@ -11,7 +11,7 @@ pipeline:
           caching:
             enabled: true
             paths: []
-          cloneCodebase: false
+          cloneCodebase: true
           execution:
             steps:
               - step:
@@ -40,3 +40,10 @@ pipeline:
         delegateSelectors:
           - docker-delegate
         description: ""
+  properties:
+    ci:
+      codebase:
+        connectorRef: account.Github
+        repoName: DevSecOps-Harness
+        build: <+input>
+        sparseCheckout: []
