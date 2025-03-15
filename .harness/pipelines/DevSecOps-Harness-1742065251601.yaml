@@ -27,9 +27,13 @@ pipeline:
                   timeout: ""
                   type: Run
           platform:
-            arch: Amd64
             os: MacOS
+            arch: Amd64
           runtime:
-            spec: {}
             type: Docker
+            spec: {}
         type: CI
+        delegateSelectors:
+          - docker-delegate
+          - helm-delegate
+          - macos-amd64
