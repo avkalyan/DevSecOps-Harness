@@ -1,0 +1,14 @@
+inputSet:
+  name: Build_avkalyan_DevSecOps_Harness_1742075726899-push-trigger-input-set
+  identifier: Build_avkalyan_DevSecOps_Harness_1742075726899pushtriggerinputset
+  orgIdentifier: default
+  projectIdentifier: default_project
+  pipeline:
+    identifier: Build_avkalyan_DevSecOps_Harness_1742075726899
+    properties:
+      ci:
+        codebase:
+          build:
+            type: branch
+            spec:
+              branch: <+trigger.branch>
