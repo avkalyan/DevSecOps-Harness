@@ -35,3 +35,9 @@ pipeline:
         type: CI
         delegateSelectors:
           - docker-delegate
+  variables:
+    - name: DOCKER_HOST
+      type: String
+      description: ""
+      required: false
+      value: unix:///Users/kalyana.venkata/.docker/run/docker.sock
