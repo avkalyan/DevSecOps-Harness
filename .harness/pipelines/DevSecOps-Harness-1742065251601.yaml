@@ -35,5 +35,3 @@ pipeline:
         type: CI
         delegateSelectors:
           - docker-delegate
-          - helm-delegate
-          - macos-amd64
