@@ -15,20 +15,19 @@ pipeline:
           execution:
             steps:
               - step:
-                  type: Run
-                  name: docker
-                  identifier: docker
-                  spec:
-                    shell: Bash
-                    command: docker login
-                contextType: Pipeline
-              - step:
                   identifier: echo
                   name: echo
                   spec:
                     command: echo hello world
                   timeout: ""
                   type: Run
+              - step:
+                  type: Run
+                  name: Run maven build
+                  identifier: Run_maven_build
+                  spec:
+                    shell: Bash
+                    command: mvn clean install -nsu -DskipMunitTests -Dlicense.skip=true
           platform:
             os: MacOS
             arch: Amd64
