@@ -3,12 +3,6 @@ pipeline:
   name: Build DevSecOps-Harness
   orgIdentifier: default
   projectIdentifier: default_project
-  properties:
-    ci:
-      codebase:
-        build: <+input>
-        connectorRef: account.Github
-        repoName: avkalyan/DevSecOps-Harness
   stages:
     - stage:
         identifier: build
@@ -16,7 +10,8 @@ pipeline:
         spec:
           caching:
             enabled: true
-          cloneCodebase: true
+            paths: []
+          cloneCodebase: false
           execution:
             steps:
               - step:
@@ -32,6 +27,9 @@ pipeline:
           runtime:
             type: Docker
             spec: {}
+          buildIntelligence:
+            enabled: false
         type: CI
         delegateSelectors:
           - docker-delegate
+        description: ""
