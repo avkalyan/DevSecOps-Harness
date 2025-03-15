@@ -26,10 +26,21 @@ pipeline:
                     command: echo hello world
                   timeout: ""
                   type: Run
+              - step:
+                  type: Run
+                  name: maven build
+                  identifier: maven_build
+                  spec:
+                    shell: Bash
+                    command: |-
+                      export M2_HOME=/usr/local/Cellar/maven/3.9.9
+                      export PATH=$PATH:$M2_HOME/bin
+                      mvn clean install -nsu -DskipMunitTests
           platform:
+            os: MacOS
             arch: Amd64
-            os: Linux
           runtime:
-            spec: {}
             type: Docker
+            spec: {}
         type: CI
+        description: ""
