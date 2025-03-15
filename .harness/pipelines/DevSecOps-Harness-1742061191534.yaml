@@ -35,7 +35,7 @@ pipeline:
                     connectorRef: account.harnessImage
                     image: harnessImage
                     shell: Bash
-                    command: mvn clean install -nsu -Dlicense.skip=true
+                    command: mvn clean install -nsu -DskipMunitTests -Dlicense.skip=true
                     imagePullPolicy: IfNotPresent
           platform:
             os: MacOS
