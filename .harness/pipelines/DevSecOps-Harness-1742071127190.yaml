@@ -33,6 +33,8 @@ pipeline:
                     outputVariables: []
                   timeout: 10m
         tags: {}
+        delegateSelectors:
+          - docker-delegate
     - stage:
         identifier: build
         name: build
