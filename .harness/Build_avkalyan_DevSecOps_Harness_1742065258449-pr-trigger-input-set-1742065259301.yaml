@@ -1,0 +1,14 @@
+inputSet:
+  name: Build_avkalyan_DevSecOps_Harness_1742065258449-pr-trigger-input-set
+  identifier: Build_avkalyan_DevSecOps_Harness_1742065258449prtriggerinputset
+  orgIdentifier: default
+  projectIdentifier: default_project
+  pipeline:
+    identifier: Build_avkalyan_DevSecOps_Harness_1742065258449
+    properties:
+      ci:
+        codebase:
+          build:
+            type: PR
+            spec:
+              number: <+trigger.prNumber>
