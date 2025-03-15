@@ -1,0 +1,36 @@
+pipeline:
+  orgIdentifier: default
+  projectIdentifier: default_project
+  stages:
+    - stage:
+        identifier: build
+        name: build
+        spec:
+          caching:
+            enabled: true
+            paths: []
+          cloneCodebase: false
+          execution:
+            steps:
+              - step:
+                  identifier: echo
+                  name: echo
+                  spec:
+                    command: echo hello world
+                  timeout: ""
+                  type: Run
+          platform:
+            os: MacOS
+            arch: Amd64
+          runtime:
+            type: Docker
+            spec: {}
+          buildIntelligence:
+            enabled: false
+        type: CI
+        delegateSelectors:
+          - docker-delegate
+        description: ""
+  identifier: Build_DevSecOpsHarness_Docker_Login
+  tags: {}
+  name: Build DevSecOps-Harness - Docker Login
