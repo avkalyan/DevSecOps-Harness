@@ -11,6 +11,29 @@ pipeline:
         repoName: avkalyan/DevSecOps-Harness
   stages:
     - stage:
+        name: docker login
+        identifier: docker_login
+        description: ""
+        type: Custom
+        spec:
+          execution:
+            steps:
+              - step:
+                  type: ShellScript
+                  name: Authenticate Docker
+                  identifier: Authenticate_Docker
+                  spec:
+                    shell: Bash
+                    executionTarget: {}
+                    source:
+                      type: Inline
+                      spec:
+                        script: echo <+secrets.getValue("DOCKER_PASSWORD")> | docker login -u <+secrets.getValue("DOCKER_USERNAME")> --password-stdin
+                    environmentVariables: []
+                    outputVariables: []
+                  timeout: 10m
+        tags: {}
+    - stage:
         identifier: build
         name: build
         spec:
