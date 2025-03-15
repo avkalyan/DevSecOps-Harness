@@ -40,4 +40,4 @@ pipeline:
       type: String
       description: ""
       required: false
-      value: unix:///Users/kalyana.venkata/.docker/run/docker.sock
+      value: /Users/kalyana.venkata/Library/Containers/com.docker.docker/Data/docker.sock
