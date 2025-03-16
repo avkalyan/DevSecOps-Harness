@@ -1,0 +1,128 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!--
+
+	Copyright (c) 2008-2012 Sonatype, Inc.
+
+	All rights reserved. Includes the third-party code listed at http://links.sonatype.com/products/nexus/pro/attributions
+	Sonatype and Sonatype Nexus are trademarks of Sonatype, Inc. Apache Maven is a trademark of the Apache Foundation.
+	M2Eclipse is a trademark of the Eclipse Foundation. All other trademarks are the property of their respective owners.
+
+--><settings xmlns="http://maven.apache.org/SETTINGS/1.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/SETTINGS/1.0.0 http://maven.apache.org/xsd/settings-1.0.0.xsd">
+	<localRepository>/Users/kalyana.venkata/.m2/Anypoint_repository</localRepository>
+	<servers>
+		<server>
+			<id>exchange-server</id>
+			<username>kalyanavenkata</username>
+			<password>JaiHanuman@062020</password>
+		</server>
+		<server>
+			<id>gov-exchange-server</id>
+			<username>~~~Client~~~</username>
+			<password>cb8929b44e054bd5898f02ce023319cd~?~a2Ae51AaB73749cdb8747ED93FDAEDa4</password>
+		</server>
+		<server>
+			<id>phsa-exchange-server</id>
+			<username>~~~Client~~~</username>
+			<password>c2bbfef031064046b526d680673dd285~?~159F91823Cfc4600a1E3CA55F3906efd</password>
+		</server>
+		<server>
+			<id>anypoint-exchange-v2</id>
+			<username>kalyanavenkata</username>
+			<password>JaiHanuman@062020</password>
+		</server>
+		<server>
+			<id>gov-anypoint-exchange-v2</id>
+			<username>~~~Client~~~</username>
+			<password>cb8929b44e054bd5898f02ce023319cd~?~a2Ae51AaB73749cdb8747ED93FDAEDa4</password>
+		</server>
+		<server>
+			<id>phsa-anypoint-exchange-v2</id>
+			<username>~~~Client~~~</username>
+			<password>c2bbfef031064046b526d680673dd285~?~159F91823Cfc4600a1E3CA55F3906efd</password>
+		</server>
+		<server>
+			<id>anypoint-exchange-v3</id>
+			<username>kalyanavenkata</username>
+			<password>JaiHanuman@062020</password>
+		</server>
+		<server>
+			<id>gov-anypoint-exchange-v3</id>
+			<username>~~~Client~~~</username>
+			<password>cb8929b44e054bd5898f02ce023319cd~?~a2Ae51AaB73749cdb8747ED93FDAEDa4</password>
+		</server>
+		<server>
+			<id>phsa-anypoint-exchange-v3</id>
+			<username>~~~Client~~~</username>
+			<password>c2bbfef031064046b526d680673dd285~?~159F91823Cfc4600a1E3CA55F3906efd</password>
+		</server>
+		<server>
+			<id>MuleEnterprise</id>
+			<username>kalyana.venkata</username>
+			<password>7xMh`d0B:FPlTZ</password>
+		</server>
+		<server>
+			<id>MuleRepository</id>
+			<username>kalyana.venkata</username>
+			<password>7xMh`d0B:FPlTZ</password>
+		</server>
+		<server>
+			<id>MulePrivate</id>
+			<username>kalyana.venkata</username>
+			<password>7xMh`d0B:FPlTZ</password>
+		</server>
+	</servers>
+	<mirrors/>
+	<profiles>
+		<profile>
+			<id>Mule Profile</id>
+			<repositories>
+				<repository>
+					<id>MuleEnterprise</id>
+					<name>MuleEnterprise</name>
+					<url>https://repository.mulesoft.org/nexus-ee/content/repositories/releases-ee/</url>
+					<layout>default</layout>
+					<releases>
+						<enabled>true</enabled>
+					</releases>
+					<snapshots>
+						<enabled>true</enabled>
+					</snapshots>
+				</repository>
+				<repository>
+					<id>MuleRepository</id>
+					<name>MuleRepository</name>
+					<url>https://repository.mulesoft.org/nexus-ee/content/repositories/releases-ee/</url>
+					<layout>default</layout>
+					<releases>
+						<enabled>true</enabled>
+					</releases>
+					<snapshots>
+						<enabled>true</enabled>
+					</snapshots>
+				</repository>
+				<repository>
+					<id>MulePrivate</id>
+					<name>MulePrivate</name>
+					<url>https://repository.mulesoft.org/nexus/content/repositories/private/</url>
+					<layout>default</layout>
+				</repository>
+			</repositories>
+			<pluginRepositories>
+				<pluginRepository>
+					<id>mule-plugin</id>
+					<name>Mule Repository</name>
+					<url>https://repository.mulesoft.org/nexus/content/repositories/public/</url>
+				</pluginRepository>
+			</pluginRepositories>
+		</profile>
+	</profiles>
+	<activeProfiles>
+		<!-- make the profile active all the time -->
+		<activeProfile>Mule Profile</activeProfile>
+	</activeProfiles>
+	<pluginGroups>
+		<!-- define the sonatype plugin group, so the nexus plugins will work without typing the groupId -->
+		<pluginGroup>org.sonatype.plugins</pluginGroup>
+		<pluginGroup>org.mule.tools</pluginGroup>
+	</pluginGroups>
+</settings>
