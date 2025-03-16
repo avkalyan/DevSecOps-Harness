@@ -1,0 +1,53 @@
+pipeline:
+  identifier: Build_avkalyan_DevSecOps_Harness_1742061223313
+  name: Build DevSecOps-Harness
+  orgIdentifier: default
+  projectIdentifier: default_project
+  properties:
+    ci:
+      codebase:
+        build: <+input>
+        connectorRef: account.Github
+        repoName: avkalyan/DevSecOps-Harness
+  stages:
+    - stage:
+        identifier: build
+        name: build
+        spec:
+          caching:
+            enabled: true
+          cloneCodebase: true
+          execution:
+            steps:
+              - step:
+                  identifier: echo
+                  name: echo
+                  spec:
+                    shell: Bash
+                    command: echo hello world
+                  timeout: ""
+                  type: Run
+              - step:
+                  type: Run
+                  name: Build Mule Project
+                  identifier: Build_Mule_Project
+                  spec:
+                    connectorRef: account.harnessImage
+                    image: harnessImage
+                    shell: Bash
+                    command: mvn clean install -nsu -DskipMunitTests -Dlicense.skip=true
+                    imagePullPolicy: IfNotPresent
+              - step:
+                  type: Run
+                  name: echo Finish
+                  identifier: echo_Finish
+                  spec:
+                    shell: Sh
+                    command: echo "Build Complete"
+          platform:
+            os: MacOS
+            arch: Amd64
+          runtime:
+            type: Docker
+            spec: {}
+        type: CI
