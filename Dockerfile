@@ -12,4 +12,4 @@ ADD Dockerfile /harness/employee-administration-system-api
 ADD settings_AnypointStudio.xml /harness/employee-administration-system-api
 WORKDIR /harness/employee-administration-system-api
 #RUN ls -ltr
-RUN mvn clean deploy -DskipMunitTests -X -s settings_AnypointStudio.xml
+#RUN mvn clean deploy -DskipMunitTests -X -s settings_AnypointStudio.xml
