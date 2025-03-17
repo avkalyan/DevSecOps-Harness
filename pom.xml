@@ -1,11 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
 	<modelVersion>4.0.0</modelVersion>
-	<groupId>com.mulesoft</groupId>
-	<artifactId>employee_administration_system_api</artifactId>
-	<version>1.0.2</version>
+	<!-- <groupId>com.mulesoft</groupId> -->
+	<groupId>32f81cbe-17af-4cf9-bdfd-4df259e34621</groupId>
+	<artifactId>harness-employee-administration-system-api</artifactId>
+	<version>1.0.0</version>
 	<packaging>mule-application</packaging>
-	<name>employee_administration_system_api</name>
+	<name>harness-employee-administration-system-api</name>
 	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
@@ -27,6 +28,7 @@
 				<version>${mule.maven.plugin.version}</version>
 				<extensions>true</extensions>
 				<configuration>
+					<classifier>custom</classifier>
 					<sharedLibraries>
 						<sharedLibrary>
 							<groupId>com.oracle.ojdbc</groupId>
@@ -61,19 +63,37 @@
 							<artifactId>ojdbc8</artifactId>
 						</sharedLibrary>
 					</sharedLibraries>
-					<cloudHubDeployment>
+					<cloudhub2Deployment>
+						<muleVersion>4.9.2</muleVersion>
+						<releaseChannel>LTS</releaseChannel>
+						<javaVersion>17</javaVersion>
+						<applicationName>harness-employee-administration-system-api</applicationName>
+						<target>Cloudhub-US-East-2</target>
+						<provider>MC</provider>
+						<environment>Sandbox</environment>
+						<replicas>1</replicas>
+						<vCores>0.1</vCores>
+						<businessGroupId>32f81cbe-17af-4cf9-bdfd-4df259e34621</businessGroupId>
+						<!-- <server>settings_AnypointStudio.xml</server> -->
+						<connectedAppClientId>30b0ffba8c9b4a35b750ccfe3b85ddff</connectedAppClientId>
+						<connectedAppClientSecret>A002f378775E489A9ae7a6AB204Fb1e3</connectedAppClientSecret>
+						<connectedAppGrantType>client_credentials</connectedAppGrantType>
+					</cloudhub2Deployment>
+					<!-- <cloudHubDeployment>
 						<applicationName>employee-administration-system-api</applicationName>
 						<environment>Sandbox</environment>
 						<objectStoreV2>true</objectStoreV2>
-						<businessGroup>FDNY</businessGroup>
+						<businessGroup>Commerce</businessGroup>
 						<workers>1</workers>
 						<workerType>Micro</workerType>
-						<muleVersion>4.4.0</muleVersion>
+						<muleVersion>4.9.2</muleVersion>
 						<region>us-east-2</region>
-						<!-- <username>${anypoint.username}</username>
-						<password>${anypoint.password}</password> -->
+						<username>${anypoint.username}</username>
+						<password>${anypoint.password}</password>
 						<connectedAppClientId>${connected.app.client.id}</connectedAppClientId>
 						<connectedAppClientSecret>${connected.app.client.secret}</connectedAppClientSecret>
+						<connectedAppClientId>92584b798e8d4fc1a27ad1b8b2001033</connectedAppClientId>
+						<connectedAppClientSecret>38B6508268A542CD8980Bb8CE710b9f3</connectedAppClientSecret>
 						<connectedAppGrantType>client_credentials</connectedAppGrantType>
 						<properties>
 							<anypoint.platform.config.analytics.agent.enabled>true</anypoint.platform.config.analytics.agent.enabled>
@@ -86,7 +106,7 @@
 							<oracle.db.user>pubsec</oracle.db.user>
 							<oracle.db.password>H2NboF.EAChBRi.w</oracle.db.password>
 						</properties>
-					</cloudHubDeployment>
+					</cloudHubDeployment> -->
 				</configuration>
 			</plugin>
 			<plugin>
@@ -293,12 +313,18 @@
 			</snapshots>
 		</pluginRepository>
 	</pluginRepositories>
-	<!-- <distributionManagement>
-		<repository>
+	<distributionManagement>
+		<!-- <repository>
 			<id>exchange-server</id>
 			<name>Anypoint Exchange Maven Facade</name>
 			<url>https://maven.anypoint.mulesoft.com/api/v2/organizations/${application.raml.business.group.id}/maven</url>
 			<layout>default</layout>
-		</repository>
-	</distributionManagement> -->
+		</repository> -->
+		<repository>
+	      <id>CorporateRepository</id>
+	      <name>Corporate Repository</name>
+	      <url>https://maven.anypoint.mulesoft.com/api/v3/organizations/32f81cbe-17af-4cf9-bdfd-4df259e34621/maven</url>
+	      <layout>default</layout>
+	    </repository>
+	</distributionManagement>
 </project>

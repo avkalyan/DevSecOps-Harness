@@ -5,7 +5,7 @@ http://www.mulesoft.org/schema/mule/salesforce http://www.mulesoft.org/schema/mu
         <http:listener-connection host="0.0.0.0" port="${http.port}" />
     </http:listener-config>
     <db:config name="Oracle_Database_Config" doc:name="Database Config" doc:id="76b25930-f6ae-46cb-92ea-042039f86f98">
-        <db:oracle-connection host="${oracle.db.host}" port="${oracle.db.port}" user="${oracle.db.user}" password="${oracle.db.password}" instance="${oracle.db.instance}" />
+        <db:oracle-connection host="${oracle.db.host}" port="${oracle.db.port}" user="${oracle.db.user}" password="${oracle.db.password}" serviceName="${oracle.db.instance}"/>
     </db:config>
     <apikit:config name="employee-api-2-config" api="api/employee-api.raml" outboundHeadersMapName="outboundHeaders" httpStatusVarName="httpStatus">
         <apikit:flow-mappings>
